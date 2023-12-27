@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginpageComponent } from './loginpage/loginpage.component';
 import { BroadcastComponent } from './broadcast/broadcast.component';
+import { BroadcastPageComponent } from './broadcast-page/broadcast-page.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { BroadcastComponent } from './broadcast/broadcast.component';
     AppComponent,
     LoginformComponent,
     LoginpageComponent,
-    BroadcastComponent
+    BroadcastComponent,
+    BroadcastPageComponent
   ],
   imports: [
     BrowserModule,

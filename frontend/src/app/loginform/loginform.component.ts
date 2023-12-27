@@ -15,7 +15,7 @@ export class LoginformComponent implements OnInit{
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      id: ['', [Validators.required]],
       password: ['', Validators.required],
     });
   }
@@ -23,7 +23,6 @@ export class LoginformComponent implements OnInit{
   onSubmit() {
     if (this.loginForm.valid) {
       const data = this.loginForm.value;
-      console.log(data)
       const apiEndpoint = 'http://127.0.0.1:8000/api/login/';
 
       this.http.post(apiEndpoint, data).subscribe(
