@@ -4,6 +4,7 @@ import requests
 from datetime import datetime
 import params
 
+
 def login(update: Update, context: CallbackContext) -> None:
     """
     this is the login function
@@ -49,19 +50,16 @@ def get_off_days(update: Update, context: CallbackContext):
     get from user the days off for the next month, and pass it as a dict to backend
     """
     days_json = {}
-    # if context.user_data["authenticate"] == True:
     current_date = datetime.now()
     date_format = '%Y-%m-%d'
     if current_date.day >= 15 and current_date.day < 28:
         while len(days_json) < 2:
             update.message.reply_text('dd-mm-yyyy: תכניס בבקשה את ימי ההסתייגויות שלך בפורמט')
-            #wait here for user replay
             message = context.args[0] if context.args else None
             date_input = datetime.strptime(message, date_format)
             days_json[f'off_day{len(days_json) + 1}'] = date_input
         while len(days_json) < 3:
             update.message.reply_text('dd-mm-yyyy: תכניס בבקשה את התאריך של יום חמישי של השבת הסתייגויות שלך בפורמט')
-            #wait here for user replay
             message = context.args[0] if context.args else None
             date_input = datetime.strptime(message, date_format)
             days_json[f'off_day{len(days_json) + 1}'] = date_input
@@ -72,3 +70,21 @@ def get_off_days(update: Update, context: CallbackContext):
     else:
         update.message.reply_text("אי אפשר לשלוח יותר הסתגוייות לחודש הבא")        
             
+
+def broadcast_message_to_users(context: CallbackContext, message):
+    """
+    Function to broadcast a message to all authenticated users.
+    """
+    authenticated_users = [
+        user_id
+        for user_id, data in context.user_data.items()
+        if data.get("authenticated", False)
+    ]
+
+    try:
+        for user_id in authenticated_users:
+            context.bot.send_message(chat_id=user_id, text=message)
+        return True
+    except Exception as e:
+        print(f"Error sending broadcast message: {e}")
+        return False
