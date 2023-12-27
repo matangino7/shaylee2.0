@@ -1,3 +1,4 @@
+from datetime import timezone, datetime
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 import random
@@ -25,6 +26,12 @@ class User(models.Model):
         return str(random.randint(1000000000, 9999999999))
 
     def save(self, *args, **kwargs):
-        if not self.password:
-            self.password = self.generate_random_password()
+        if self.birth_date is not None and not isinstance(self.birth_date, str):
+            self.birth_date = str(self.birth_date)
+
+            try:
+                self.birth_date = datetime.fromisoformat(self.birth_date)
+            except (ValueError, TypeError):
+                pass
+
         super(User, self).save(*args, **kwargs)

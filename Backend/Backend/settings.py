@@ -50,10 +50,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-REST_FRAMEWORK = {
-    'DATETIME_FORMAT': "%d-%m-%YT%H:%M:%S",
-}
-
 
 ROOT_URLCONF = 'Backend.urls'
 

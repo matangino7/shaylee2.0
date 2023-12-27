@@ -10,9 +10,10 @@ from rest_framework.response import Response
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    
 
 class Login(APIView):
-    def get(self, request):
+    def post(self, request):
         user = get_object_or_404(User, id=request.data.get('id'))
         password = request.data.get('password')
         if user.password == password:

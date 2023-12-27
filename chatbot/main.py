@@ -23,7 +23,7 @@ def echo(update: Update, context: CallbackContext) -> None:
 def trigger_broadcast():
     """Endpoint to trigger a broadcast."""
     try:
-        message = request.json.get("message", "Default broadcast message")
+        message = request.get_json().get("message")
         success = functions_matan.broadcast_message_to_users(updater.dispatcher, message)
         if success:
             return "Broadcast triggered successfully!"

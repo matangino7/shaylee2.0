@@ -16,13 +16,10 @@ def login(update: Update, context: CallbackContext) -> None:
 
         id, password = context.args
         my_request = requests.api.post(
-            params.login_endpoint, json={"id": id, "password": password}
+            params.login_endpoint, json={"id": str(id), "password": str(password)}
         )
-
         my_request.raise_for_status()
-
-        response_data = my_request.json()
-        if response_data.get('success', False):
+        if my_request.status_code == 200:
             context.user_data["authenticated"] = True
             context.user_data["id"] = id
             update.message.reply_text("Login successful! You are now authenticated.")
@@ -31,6 +28,7 @@ def login(update: Update, context: CallbackContext) -> None:
             update.message.reply_text("Invalid credentials. Login failed.")
 
     except requests.exceptions.RequestException as e:
+        print(e)
         update.message.reply_text(f"ישנה תקלה בהיתחברות, נסה שנית מאוחר יותר")
 
     except Exception as e:
@@ -49,31 +47,45 @@ def send_dates(update: Update, context: CallbackContext) -> None:
     update.message.reply_text('Great! Please provide three dates in the format dd-mm-yyyy.')
     context.user_data['dates'] = []
 
-def collect_dates(update: Update, context: CallbackContext) -> None:
+
+def collect_dates(update, context):
+    print(context.user_data.items())
     if 'dates' not in context.user_data:
         context.user_data['dates'] = []
 
     if len(context.user_data['dates']) < 3:
         try:
             date_str = update.message.text
-            date_object = datetime.strptime(date_str, "%d-%m-%Y")
+            date_object = datetime.strptime(date_str, "%Y-%m-%d")
             context.user_data['dates'].append(date_object)
             update.message.reply_text(f'Thank you! Date {len(context.user_data["dates"])} received.')
         except ValueError:
             update.message.reply_text('Invalid date format. Please use dd-mm-yyyy.')
 
     if len(context.user_data['dates']) == 3:
-
         user_id = update.message.from_user.id
         try:
-            response = requests.post(f'{params.senddates_endpoint}{context.user_data["id"]}', json={'off_day1': context.user_data['dates'][0], 'off_day2': context.user_data['dates'][1], 'off_weekend': context.user_data['dates'][2]})
+            off_day1_str = context.user_data['dates'][0].date().isoformat()
+            off_day2_str = context.user_data['dates'][1].date().isoformat()
+            off_weekend_str = context.user_data['dates'][2].date().isoformat()
+
+            response = requests.patch(
+                f'{params.senddates_endpoint}{context.user_data["id"]}/',
+                json={
+                    'off_day1': off_day1_str,
+                    'off_day2': off_day2_str,
+                    'off_weekend': off_weekend_str
+                }
+            )
+
+            print(response.request.body)
             if response.status_code == 200:
                 update.message.reply_text('Dates submitted successfully!')
             else:
                 update.message.reply_text('Failed to submit dates. Please try again later.')
         except Exception as e:
-            update.message.reply_text(f'An error occurred: {str(e)}') 
-            
+            update.message.reply_text(f'An error occurred: {str(e)}')
+
 
 def broadcast_message_to_users(context: CallbackContext, message):
     """
