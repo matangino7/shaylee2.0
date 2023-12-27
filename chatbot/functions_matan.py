@@ -45,30 +45,34 @@ def help(update: Update, context: CallbackContext):
     update.message.reply_text("/off_days בפקודה זו תוכל להגיש הסתיגויות כאשר זה פתוח במערכת")
 
 
-def get_off_days(update: Update, context: CallbackContext):
-    """
-    get from user the days off for the next month, and pass it as a dict to backend
-    """
-    days_json = {}
-    current_date = datetime.now()
-    date_format = '%Y-%m-%d'
-    if current_date.day >= 15 and current_date.day < 28:
-        while len(days_json) < 2:
-            update.message.reply_text('dd-mm-yyyy: תכניס בבקשה את ימי ההסתייגויות שלך בפורמט')
-            message = context.args[0] if context.args else None
-            date_input = datetime.strptime(message, date_format)
-            days_json[f'off_day{len(days_json) + 1}'] = date_input
-        while len(days_json) < 3:
-            update.message.reply_text('dd-mm-yyyy: תכניס בבקשה את התאריך של יום חמישי של השבת הסתייגויות שלך בפורמט')
-            message = context.args[0] if context.args else None
-            date_input = datetime.strptime(message, date_format)
-            days_json[f'off_day{len(days_json) + 1}'] = date_input
-            update.message.reply_text("ישנה שגיאה בהודעה ששלחת, אנא שלח שוב")        
-        return days_json
-    elif current_date.day < 15:
-        update.message.reply_text("אפשר לשלוח הסתייגויות לחודש החדש, החל מה15 לחודש")        
-    else:
-        update.message.reply_text("אי אפשר לשלוח יותר הסתגוייות לחודש הבא")        
+def send_dates(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text('Great! Please provide three dates in the format dd-mm-yyyy.')
+    context.user_data['dates'] = []
+
+def collect_dates(update: Update, context: CallbackContext) -> None:
+    if 'dates' not in context.user_data:
+        context.user_data['dates'] = []
+
+    if len(context.user_data['dates']) < 3:
+        try:
+            date_str = update.message.text
+            date_object = datetime.strptime(date_str, "%d-%m-%Y")
+            context.user_data['dates'].append(date_object)
+            update.message.reply_text(f'Thank you! Date {len(context.user_data["dates"])} received.')
+        except ValueError:
+            update.message.reply_text('Invalid date format. Please use dd-mm-yyyy.')
+
+    if len(context.user_data['dates']) == 3:
+
+        user_id = update.message.from_user.id
+        try:
+            response = requests.post(f'{params.senddates_endpoint}{context.user_data["id"]}', json={'off_day1': context.user_data['dates'][0], 'off_day2': context.user_data['dates'][1], 'off_weekend': context.user_data['dates'][2]})
+            if response.status_code == 200:
+                update.message.reply_text('Dates submitted successfully!')
+            else:
+                update.message.reply_text('Failed to submit dates. Please try again later.')
+        except Exception as e:
+            update.message.reply_text(f'An error occurred: {str(e)}') 
             
 
 def broadcast_message_to_users(context: CallbackContext, message):

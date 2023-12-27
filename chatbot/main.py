@@ -44,7 +44,8 @@ def main() -> None:
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(CommandHandler("login", functions_matan.login))
     dispatcher.add_handler(CommandHandler("help", functions_matan.help))
-    dispatcher.add_handler(CommandHandler("off_days", functions_matan.get_off_days))
+    dispatcher.add_handler(CommandHandler("sendates", functions_matan.send_dates))
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, functions_matan.collect_dates))
     updater.start_polling(timeout=10)
     updater.idle()
 
