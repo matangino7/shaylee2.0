@@ -6,7 +6,7 @@ class User(models.Model):
     id = models.PositiveIntegerField(primary_key=True, unique=True, blank=False, null=False, validators=[MaxValueValidator(999999999), MinValueValidator(100000000)])
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    birth_date = models.DateTimeField(null=True, help_text="Format: dd-mm-yyyy")
+    birth_date = models.DateField(null=True)
     is_staff = models.BooleanField(default=False)
     phone_number = models.CharField(max_length=15, validators=[RegexValidator(r'^\+?972\d{8,10}$', message="Israeli phone number must be in the format +972XXXXXXXXX")])
     commander_contact = models.CharField(max_length=15, validators=[RegexValidator(r'^\+?972\d{8,10}$', message="Israeli phone number must be in the format +972XXXXXXXXX")])
