@@ -7,12 +7,14 @@ import { LoginformComponent } from './loginform/loginform.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginpageComponent } from './loginpage/loginpage.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginformComponent
+    LoginformComponent,
+    LoginpageComponent
   ],
   imports: [
     BrowserModule,

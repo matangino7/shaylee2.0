@@ -1,0 +1,14 @@
+
+  
+div {
+    width: 100vw;
+    height: 50vh;
+    background: #5e97ab;
+  }
+
+img {
+    width: 125px;
+    height: 125px;
+    margin-top: 1vh;
+    margin-left: 1vw;
+}
