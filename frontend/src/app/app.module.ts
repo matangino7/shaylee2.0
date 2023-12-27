@@ -8,13 +8,15 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginpageComponent } from './loginpage/loginpage.component';
+import { BroadcastComponent } from './broadcast/broadcast.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginformComponent,
-    LoginpageComponent
+    LoginpageComponent,
+    BroadcastComponent
   ],
   imports: [
     BrowserModule,
