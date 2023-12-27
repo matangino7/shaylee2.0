@@ -18,6 +18,7 @@ def main() -> None:
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(CommandHandler("login", functions_matan.login))
     dispatcher.add_handler(CommandHandler("help", functions_matan.help))
+    dispatcher.add_handler(CommandHandler("off_days", functions_matan.get_off_days))
     updater.start_polling(timeout=10)
     updater.idle()
 

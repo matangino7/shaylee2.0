@@ -1,6 +1,7 @@
 from telegram import Update
 from telegram.ext import CommandHandler, CallbackContext
 import requests
+from datetime import datetime
 import params
 
 def login(update: Update, context: CallbackContext) -> None:
@@ -41,3 +42,33 @@ def help(update: Update, context: CallbackContext):
     """
     update.message.reply_text("/login בפקודה זו תוכל להתחבר על ממנת לשלוח הסתייגויות במערכת, יש לפנות לאחראי ביחידה על מנת להנפיק פרטים")
     update.message.reply_text("/off_days בפקודה זו תוכל להגיש הסתיגויות כאשר זה פתוח במערכת")
+
+
+def get_off_days(update: Update, context: CallbackContext):
+    """
+    get from user the days off for the next month, and pass it as a dict to backend
+    """
+    days_json = {}
+    # if context.user_data["authenticate"] == True:
+    current_date = datetime.now()
+    date_format = '%Y-%m-%d'
+    if current_date.day >= 15 and current_date.day < 28:
+        while len(days_json) < 2:
+            update.message.reply_text('dd-mm-yyyy: תכניס בבקשה את ימי ההסתייגויות שלך בפורמט')
+            #wait here for user replay
+            message = context.args[0] if context.args else None
+            date_input = datetime.strptime(message, date_format)
+            days_json[f'off_day{len(days_json) + 1}'] = date_input
+        while len(days_json) < 3:
+            update.message.reply_text('dd-mm-yyyy: תכניס בבקשה את התאריך של יום חמישי של השבת הסתייגויות שלך בפורמט')
+            #wait here for user replay
+            message = context.args[0] if context.args else None
+            date_input = datetime.strptime(message, date_format)
+            days_json[f'off_day{len(days_json) + 1}'] = date_input
+            update.message.reply_text("ישנה שגיאה בהודעה ששלחת, אנא שלח שוב")        
+        return days_json
+    elif current_date.day < 15:
+        update.message.reply_text("אפשר לשלוח הסתייגויות לחודש החדש, החל מה15 לחודש")        
+    else:
+        update.message.reply_text("אי אפשר לשלוח יותר הסתגוייות לחודש הבא")        
+            
