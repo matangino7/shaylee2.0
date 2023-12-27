@@ -10,9 +10,9 @@ class User(models.Model):
     is_staff = models.BooleanField(default=False)
     phone_number = models.CharField(max_length=15, validators=[RegexValidator(r'^\+?972\d{8,10}$', message="Israeli phone number must be in the format +972XXXXXXXXX")])
     commander_contact = models.CharField(max_length=15, validators=[RegexValidator(r'^\+?972\d{8,10}$', message="Israeli phone number must be in the format +972XXXXXXXXX")])
-    off_day1 = models.CharField(max_length=10, blank=True, help_text="Format: dd-mm-yyyy")
-    off_day2 = models.CharField(max_length=10, blank=True, help_text="Format: dd-mm-yyyy")
-    off_weekend = models.BooleanField(default=False, help_text="Format: dd-mm-yyyy")
+    off_day1 = models.DateField(blank=True)
+    off_day2 = models.DateField(blank=True)
+    off_weekend = models.DateField(blank=True)
     password = models.CharField(max_length=10, default='')
     month_frequency = models.PositiveIntegerField(
         default=1,
