@@ -1,0 +1,64 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+#back {
+  content: '';
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../assets/background-image.png');
+  background-size: cover;
+  z-index: -1;
+}
+
+h1 {
+  font-size: 60px;
+  text-align: center;
+}
+
+#calendar {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-y: auto;
+}
+
+#calendar table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: rgb(68, 104, 137);
+}
+
+#calendar th, #calendar td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+#calendar th {
+  background-color: rgb(28, 58, 95);
+}
+
+#calendar td {
+  cursor: pointer;
+}
+
+#calendar td:hover {
+  background-color: rgb(39, 84, 127);
+  border: 3px solid white;
+}
+
+.text {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color:white
+}
+
+.number{
+  font-size: 30px;
+  margin: 0;
+
+}

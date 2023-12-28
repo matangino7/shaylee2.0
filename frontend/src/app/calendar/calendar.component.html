@@ -1,0 +1,38 @@
+<div id="back">
+  <div id="calendar">
+    <h1 class="text">לוח שמירות חודשי</h1>
+    <table>
+      <tr>
+        <th *ngFor="let weekday of weekHebrew" class="week_day_block text">{{ weekday }}</th>
+      </tr>
+      <ng-container *ngFor="let row of calendarData; let isFirstRow = first">
+        <tr *ngIf="!isFirstRow">
+          <ng-container *ngFor="let cell of row">
+            <td *ngIf="cell; else emptyCell" [ngClass]="{'current-day': cell.isCurrentDay}" class="box">
+              <h4 *ngIf="cell.day !== null" class="text number">{{ cell.day }}</h4>
+              <h4 class="text">משמרת א</h4>
+              <ng-container *ngIf="shiftData[cell.day]?.a_post">
+                <p *ngIf="shiftData[cell.day]?.a_post?.first_guard">{{ shiftData[cell.day]?.a_post?.first_guard }}</p>
+                <p *ngIf="shiftData[cell.day]?.a_post?.second_guard">{{ shiftData[cell.day]?.a_post?.second_guard }}</p>
+              </ng-container>
+
+              <h4 class="text">משמרת ב</h4>
+              <ng-container *ngIf="shiftData[cell.day]?.b_post">
+                <p *ngIf="shiftData[cell.day]?.b_post?.first_guard">{{ shiftData[cell.day]?.b_post?.first_guard }}</p>
+                <p *ngIf="shiftData[cell.day]?.b_post?.second_guard">{{ shiftData[cell.day]?.b_post?.second_guard }}</p>
+              </ng-container>
+
+              <h4 class="text">מאיישים</h4>
+              <ng-container *ngIf="shiftData[cell.day]?.manning_post">
+                <p *ngIf="shiftData[cell.day]?.manning_post?.first_guard">{{ shiftData[cell.day]?.manning_post?.first_guard }}</p>
+                <p *ngIf="shiftData[cell.day]?.manning_post?.second_guard">{{ shiftData[cell.day]?.manning_post?.second_guard }}</p>
+              </ng-container>
+            </td>
+            <ng-template #emptyCell><td></td></ng-template>
+          </ng-container>
+        </tr>
+      </ng-container>
+    </table>
+    <app-get-shifts (shiftsFetched)="handleShiftsFetched($event)"></app-get-shifts>
+  </div>
+</div>
