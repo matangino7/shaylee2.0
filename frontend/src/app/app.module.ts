@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginpageComponent } from './loginpage/loginpage.component';
 import { BroadcastComponent } from './broadcast/broadcast.component';
 import { BroadcastPageComponent } from './broadcast-page/broadcast-page.component';
+import { CreateuserComponent } from './createuser/createuser.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { BroadcastPageComponent } from './broadcast-page/broadcast-page.componen
     LoginformComponent,
     LoginpageComponent,
     BroadcastComponent,
-    BroadcastPageComponent
+    BroadcastPageComponent,
+    CreateuserComponent
   ],
   imports: [
     BrowserModule,

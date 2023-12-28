@@ -11,9 +11,9 @@ class User(models.Model):
     is_staff = models.BooleanField(default=False)
     phone_number = models.CharField(max_length=15, validators=[RegexValidator(r'^\+?972\d{8,10}$', message="Israeli phone number must be in the format +972XXXXXXXXX")])
     commander_contact = models.CharField(max_length=15, validators=[RegexValidator(r'^\+?972\d{8,10}$', message="Israeli phone number must be in the format +972XXXXXXXXX")])
-    off_day1 = models.DateField(blank=True)
-    off_day2 = models.DateField(blank=True)
-    off_weekend = models.DateField(blank=True)
+    off_day1 = models.DateField(blank=True, null=True)
+    off_day2 = models.DateField(blank=True, null=True)
+    off_weekend = models.DateField(blank=True, null=True)
     password = models.CharField(max_length=10, default='')
     month_frequency = models.PositiveIntegerField(
         default=1,
@@ -26,6 +26,7 @@ class User(models.Model):
         return str(random.randint(1000000000, 9999999999))
 
     def save(self, *args, **kwargs):
+        self.password = self.generate_random_password()
         if self.birth_date is not None and not isinstance(self.birth_date, str):
             self.birth_date = str(self.birth_date)
 
