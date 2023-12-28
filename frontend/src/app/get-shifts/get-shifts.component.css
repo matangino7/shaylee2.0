@@ -1,0 +1,22 @@
+button {
+    background-color: rgb(68, 104, 137);
+    border-radius: 3px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 1px solid white;
+    color: white;
+    height: 120px;
+    width: 200px;
+    margin: 10px;
+    font-size: 40px;
+    
+    /* Center horizontally */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button:hover {
+    background-color: rgb(39, 84, 127);
+    border: 3px solid white;
+    cursor: pointer;
+}
