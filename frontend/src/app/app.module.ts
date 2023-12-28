@@ -8,13 +8,19 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginpageComponent } from './loginpage/loginpage.component';
+import { BroadcastComponent } from './broadcast/broadcast.component';
+import { BroadcastPageComponent } from './broadcast-page/broadcast-page.component';
+import { CreateuserComponent } from './createuser/createuser.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginformComponent,
-    LoginpageComponent
+    LoginpageComponent,
+    BroadcastComponent,
+    BroadcastPageComponent,
+    CreateuserComponent
   ],
   imports: [
     BrowserModule,

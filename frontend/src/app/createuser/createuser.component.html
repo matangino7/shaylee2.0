@@ -1,0 +1,15 @@
+<div>
+    <form class="login" [formGroup]="loginForm">
+        <input type="text" placeholder="id" formControlName="id">
+        <input type="text" placeholder="first name" formControlName="first_name">
+        <input type="text" placeholder="last name" formControlName="last_name">
+        <input type="date" placeholder="birth date" formControlName="birth_date">
+        <input type="text" placeholder="phone_number" formControlName="phone_number">
+        <input type="text" placeholder="commander contact" formControlName="commander_contact">
+        <label>b objection</label>
+        <input type="checkbox" placeholder="b objection" formControlName="b_objection">
+        <label>lieutenant</label>
+        <input type="checkbox" placeholder="lieutenant" formControlName="lieutenant">
+        <button (click)="onSubmit()">Submit</button>
+    </form>
+</div>
