@@ -15,10 +15,10 @@ class User(models.Model):
     off_day2 = models.DateField(blank=True, null=True)
     off_weekend = models.DateField(blank=True, null=True)
     password = models.CharField(max_length=10, default='')
-    month_frequency = models.PositiveIntegerField(
-        default=1,
-        validators=[MinValueValidator(1), MaxValueValidator(4)]
-    )
+    # month_frequency = models.PositiveIntegerField(
+    #     default=1,
+    #     validators=[MinValueValidator(1), MaxValueValidator(4)]
+    # )
     b_objection=models.BooleanField(default=False)
     lieutenant=models.BooleanField(default=False)
 

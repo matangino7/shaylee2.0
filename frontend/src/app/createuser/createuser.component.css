@@ -1,14 +1,16 @@
 body {
     background-color: #f45b69;
-    font-family: "Asap", sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
   label{
-    font-family: "Asap", sans-serif;
-    color: rgba(0, 0, 0, 0.6);
+    margin: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgba(0, 0, 0, 0.8);
   }
   
   .login {
+    direction: rtl;
     overflow: hidden;
     background-color: white;
     padding: 40px 30px 30px 30px;
@@ -17,7 +19,7 @@ body {
     top: 50%;
     left: 50%;
     width: 700px;
-    height: 45vh;
+    height: 80vh;
     margin-bottom: -10vh;
     -webkit-transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
@@ -56,29 +58,31 @@ body {
     animation: wawes 7s infinite;
   }
   .login > input {
-    font-family: "Asap", sans-serif;
+    height:15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: block;
     border-radius: 5px;
     font-size: 16px;
-    background: white;
+    background: whitesmoke;
     width: 100%;
     border: 0;
     padding: 10px 10px;
     margin: 15px -10px;
   }
+
   .login > button {
-    font-family: "Asap", sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     cursor: pointer;
     color: #fff;
     font-size: 16px;
     text-transform: uppercase;
-    width: 80px;
+    width: 100px;
     border: 0;
     padding: 10px 0;
     margin-top: 10px;
     margin-left: -5px;
     border-radius: 5px;
-    background-color: #6edcde;
+    background-color: #5eafb1;
     -webkit-transition: background-color 300ms;
     -moz-transition: background-color 300ms;
     transition: background-color 300ms;

@@ -10,7 +10,6 @@ import { GetShiftsComponent } from './get-shifts/get-shifts.component';
 import { LoginformComponent } from './loginform/loginform.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { LoginpageComponent } from './loginpage/loginpage.component';
 import { BroadcastComponent } from './broadcast/broadcast.component';
 import { BroadcastPageComponent } from './broadcast-page/broadcast-page.component';
@@ -21,7 +20,7 @@ import { CreateuserComponent } from './createuser/createuser.component';
   declarations: [
     AppComponent,
     CalendarComponent,
-    GetShiftsComponent
+    GetShiftsComponent,
     LoginformComponent,
     LoginpageComponent,
     BroadcastComponent,
@@ -31,7 +30,7 @@ import { CreateuserComponent } from './createuser/createuser.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
