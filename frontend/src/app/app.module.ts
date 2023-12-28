@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +13,9 @@ import { LoginpageComponent } from './loginpage/loginpage.component';
 import { BroadcastComponent } from './broadcast/broadcast.component';
 import { BroadcastPageComponent } from './broadcast-page/broadcast-page.component';
 import { CreateuserComponent } from './createuser/createuser.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatButtonModule } from '@angular/material/button'
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { CreateuserComponent } from './createuser/createuser.component';
     LoginpageComponent,
     BroadcastComponent,
     BroadcastPageComponent,
-    CreateuserComponent
+    CreateuserComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,8 @@ import { CreateuserComponent } from './createuser/createuser.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

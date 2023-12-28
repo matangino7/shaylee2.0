@@ -1,0 +1,17 @@
+.menu-spacer {
+    flex: 1 1 auto;
+  }
+
+
+  .mat-shadow-button {
+    transition: box-shadow 0.3s ease; 
+  }
+  
+  .mat-shadow-button:hover {
+    background-color: #315d77;
+  }
+
+
+  #logo {
+    margin-left: 0.5em;
+  }

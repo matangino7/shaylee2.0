@@ -40,11 +40,11 @@ def help(update: Update, context: CallbackContext):
     this is the help function
     """
     update.message.reply_text("/login בפקודה זו תוכל להתחבר על ממנת לשלוח הסתייגויות במערכת, יש לפנות לאחראי ביחידה על מנת להנפיק פרטים")
-    update.message.reply_text("/off_days בפקודה זו תוכל להגיש הסתיגויות כאשר זה פתוח במערכת")
+    update.message.reply_text("/sendates בפקודה זו תוכל להגיש הסתיגויות כאשר זה פתוח במערכת")
 
 
 def send_dates(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text('Great! Please provide three dates in the format dd-mm-yyyy.')
+    update.message.reply_text('Great! Please provide three dates in the format yyyy-mm-dd.')
     context.user_data['dates'] = []
 
 
@@ -60,7 +60,7 @@ def collect_dates(update, context):
             context.user_data['dates'].append(date_object)
             update.message.reply_text(f'Thank you! Date {len(context.user_data["dates"])} received.')
         except ValueError:
-            update.message.reply_text('Invalid date format. Please use dd-mm-yyyy.')
+            update.message.reply_text('Invalid date format. Please use yyyy-mm-dd.')
 
     if len(context.user_data['dates']) == 3:
         user_id = update.message.from_user.id
