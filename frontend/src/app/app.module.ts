@@ -16,7 +16,16 @@ import { CreateuserComponent } from './createuser/createuser.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatButtonModule } from '@angular/material/button'
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
 
+const routes: Routes = [
+    { path: '', component: LoginpageComponent},
+    { path: 'create-user', component: CreateuserComponent },
+    { path: 'calendar', component: CalendarComponent },
+    { path: 'broadcast', component: BroadcastPageComponent },
+    // Add more routes as needed
+  ];
 
 @NgModule({
   declarations: [
@@ -38,9 +47,11 @@ import { MatButtonModule } from '@angular/material/button'
     ReactiveFormsModule,
     HttpClientModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [RouterModule]
 })
 export class AppModule { }

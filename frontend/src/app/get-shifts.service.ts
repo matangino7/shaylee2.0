@@ -10,6 +10,6 @@ export class GetShiftsService {
   constructor(private http: HttpClient) { }
 
   getShifts(): Observable<any> {
-    return this.http.put<any>('http://localhost:8000/api/calendar/', {});
+    return this.http.get<any>('http://localhost:8000/api/calendar/', {});
   }
 }
